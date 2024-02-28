@@ -1,28 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addContact } from "../../actions/contactActions";
 
-const contactFormStyles = {
-   maxWidth: "400px",
-   margin: "0 auto",
-};
-
-const contactFormInputStyles = {
-   width: "calc(100% - 30px)",
-   padding: "10px",
-   marginBottom: "10px",
-   border: "1px solid #ccc",
-   borderRadius: "5px",
-};
-
-const contactFormButtonStyles = {
-   padding: "10px 20px",
-   backgroundColor: "#007bff",
-   color: "#fff",
-   border: "none",
-   borderRadius: "5px",
-   cursor: "pointer",
-};
-
-const ContactForm = ({ onSubmit }) => {
+const ContactForm = () => {
+   const dispatch = useDispatch();
    const [firstName, setFirstName] = useState("");
    const [lastName, setLastName] = useState("");
    const [email, setEmail] = useState("");
@@ -36,7 +17,7 @@ const ContactForm = ({ onSubmit }) => {
          return;
       }
       const fullName = `${firstName} ${lastName}`;
-      onSubmit({ fullName, email, phone });
+      dispatch(addContact({ fullName, email, phone }));
       setFirstName("");
       setLastName("");
       setEmail("");
@@ -87,6 +68,28 @@ const ContactForm = ({ onSubmit }) => {
          </form>
       </div>
    );
+};
+
+const contactFormStyles = {
+   maxWidth: "400px",
+   margin: "0 auto",
+};
+
+const contactFormInputStyles = {
+   width: "calc(100% - 30px)",
+   padding: "10px",
+   marginBottom: "10px",
+   border: "1px solid #ccc",
+   borderRadius: "5px",
+};
+
+const contactFormButtonStyles = {
+   padding: "10px 20px",
+   backgroundColor: "#007bff",
+   color: "#fff",
+   border: "none",
+   borderRadius: "5px",
+   cursor: "pointer",
 };
 
 export default ContactForm;

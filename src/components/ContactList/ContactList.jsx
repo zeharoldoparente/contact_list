@@ -1,5 +1,39 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteContact, editContact } from "../../actions/contactActions";
 import ContactItem from "../ContactItem/ContactItem";
+
+const ContactList = () => {
+   const contacts = useSelector((state) => state.contacts);
+   const dispatch = useDispatch();
+
+   const handleDelete = (index) => {
+      dispatch(deleteContact(index));
+   };
+
+   const handleEdit = (index, editedContact) => {
+      dispatch(editContact(index, editedContact));
+   };
+
+   return (
+      <div>
+         <h2>Lista de Contatos 📋</h2>
+         <ul style={contactListStyles}>
+            {contacts.map((contact, index) => (
+               <li key={index} style={contactListItemStyles}>
+                  <ContactItem
+                     contact={contact}
+                     onDelete={() => handleDelete(index)}
+                     onEdit={(editedContact) =>
+                        handleEdit(index, editedContact)
+                     }
+                  />
+               </li>
+            ))}
+         </ul>
+      </div>
+   );
+};
 
 const contactListStyles = {
    listStyleType: "none",
@@ -11,25 +45,6 @@ const contactListItemStyles = {
    borderRadius: "10px",
    marginBottom: "10px",
    padding: "15px",
-};
-
-const ContactList = ({ contacts, onDelete, onEdit }) => {
-   return (
-      <div>
-         <h2>Lista de Contatos 📋</h2>
-         <ul style={contactListStyles}>
-            {contacts.map((contact, index) => (
-               <li key={index} style={contactListItemStyles}>
-                  <ContactItem
-                     contact={contact}
-                     onDelete={() => onDelete(index)}
-                     onEdit={() => onEdit(index, contact)}
-                  />
-               </li>
-            ))}
-         </ul>
-      </div>
-   );
 };
 
 export default ContactList;
