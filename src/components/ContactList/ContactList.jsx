@@ -16,7 +16,7 @@ const ContactList = () => {
    };
 
    return (
-      <div>
+      <div style={contactListContainerStyles}>
          <h2>Lista de Contatos 📋</h2>
          <ul style={contactListStyles}>
             {contacts.map((contact, index) => (
@@ -45,6 +45,13 @@ const contactListItemStyles = {
    borderRadius: "10px",
    marginBottom: "10px",
    padding: "15px",
+};
+
+const contactListContainerStyles = {
+   background: "rgba(255, 255, 255, 0.5)",
+   backdropFilter: "blur(5px)",
+   borderRadius: "10px",
+   padding: "20px",
 };
 
 export default ContactList;

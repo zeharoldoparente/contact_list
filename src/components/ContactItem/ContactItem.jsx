@@ -11,6 +11,26 @@ const contactItemStyles = {
    justifyContent: "space-between",
 };
 
+const deleteButtonStyles = {
+   padding: "8px 15px",
+   marginLeft: "10px",
+   border: "none",
+   borderRadius: "5px",
+   cursor: "pointer",
+   backgroundColor: "#FF5252", // Vermelho
+   color: "#fff",
+};
+
+const editButtonStyles = {
+   padding: "8px 15px",
+   marginLeft: "10px",
+   border: "none",
+   borderRadius: "5px",
+   cursor: "pointer",
+   backgroundColor: "#3F51B5", // Azul
+   color: "#fff",
+};
+
 const contactItemButtonStyles = {
    padding: "8px 15px",
    marginLeft: "10px",
@@ -82,10 +102,10 @@ const ContactItem = ({ contact, onDelete, onEdit }) => {
             {contact.fullName} - {contact.email} - {contact.phone}
          </p>
          <div>
-            <button style={contactItemButtonStyles} onClick={onDelete}>
+            <button style={deleteButtonStyles} onClick={onDelete}>
                Excluir
             </button>
-            <button style={contactItemButtonStyles} onClick={handleEdit}>
+            <button style={editButtonStyles} onClick={handleEdit}>
                Editar
             </button>
          </div>
