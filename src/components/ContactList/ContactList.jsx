@@ -2,6 +2,26 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteContact, editContact } from "../../actions/contactActions";
 import ContactItem from "../ContactItem/ContactItem";
+import styled from "styled-components";
+
+const ListContainer = styled.div`
+   background: rgba(255, 255, 255, 0.5);
+   backdrop-filter: blur(5px);
+   border-radius: 10px;
+   padding: 20px;
+`;
+
+const List = styled.ul`
+   list-style-type: none;
+   padding: 0;
+`;
+
+const ListItem = styled.li`
+   background-color: #f4f4f4;
+   border-radius: 10px;
+   margin-bottom: 10px;
+   padding: 15px;
+`;
 
 const ContactList = () => {
    const contacts = useSelector((state) => state.contacts);
@@ -16,11 +36,11 @@ const ContactList = () => {
    };
 
    return (
-      <div style={contactListContainerStyles}>
+      <ListContainer>
          <h2>Lista de Contatos 📋</h2>
-         <ul style={contactListStyles}>
+         <List>
             {contacts.map((contact, index) => (
-               <li key={index} style={contactListItemStyles}>
+               <ListItem key={index}>
                   <ContactItem
                      contact={contact}
                      onDelete={() => handleDelete(index)}
@@ -28,30 +48,11 @@ const ContactList = () => {
                         handleEdit(index, editedContact)
                      }
                   />
-               </li>
+               </ListItem>
             ))}
-         </ul>
-      </div>
+         </List>
+      </ListContainer>
    );
-};
-
-const contactListStyles = {
-   listStyleType: "none",
-   padding: 0,
-};
-
-const contactListItemStyles = {
-   backgroundColor: "#f4f4f4",
-   borderRadius: "10px",
-   marginBottom: "10px",
-   padding: "15px",
-};
-
-const contactListContainerStyles = {
-   background: "rgba(255, 255, 255, 0.5)",
-   backdropFilter: "blur(5px)",
-   borderRadius: "10px",
-   padding: "20px",
 };
 
 export default ContactList;

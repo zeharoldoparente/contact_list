@@ -1,43 +1,53 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 
-const contactItemStyles = {
-   backgroundColor: "#fff",
-   border: "1px solid #ccc",
-   borderRadius: "10px",
-   marginBottom: "10px",
-   padding: "15px",
-   display: "flex",
-   alignItems: "center",
-   justifyContent: "space-between",
-};
+const ItemContainer = styled.div`
+   background-color: #fff;
+   border: 1px solid #ccc;
+   border-radius: 10px;
+   margin-bottom: 10px;
+   padding: 15px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+`;
 
-const deleteButtonStyles = {
-   padding: "8px 15px",
-   marginLeft: "10px",
-   border: "none",
-   borderRadius: "5px",
-   cursor: "pointer",
-   backgroundColor: "#FF5252", // Vermelho
-   color: "#fff",
-};
+const DeleteButton = styled.button`
+   padding: 8px 15px;
+   margin-left: 10px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   background-color: #ff5252;
+   color: #fff;
+`;
 
-const editButtonStyles = {
-   padding: "8px 15px",
-   marginLeft: "10px",
-   border: "none",
-   borderRadius: "5px",
-   cursor: "pointer",
-   backgroundColor: "#3F51B5", // Azul
-   color: "#fff",
-};
+const EditButton = styled.button`
+   padding: 8px 15px;
+   margin-left: 10px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   background-color: #3f51b5;
+   color: #fff;
+`;
 
-const contactItemButtonStyles = {
-   padding: "8px 15px",
-   marginLeft: "10px",
-   border: "none",
-   borderRadius: "5px",
-   cursor: "pointer",
-};
+const ItemButton = styled.button`
+   padding: 8px 15px;
+   margin-left: 10px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+`;
+
+const Button = styled.button`
+   /* Adicione esta linha */
+   padding: 8px 15px;
+   margin-left: 10px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+`;
 
 const ContactItem = ({ contact, onDelete, onEdit }) => {
    const [isEditing, setIsEditing] = useState(false);
@@ -69,7 +79,7 @@ const ContactItem = ({ contact, onDelete, onEdit }) => {
 
    if (isEditing) {
       return (
-         <div style={contactItemStyles}>
+         <ItemContainer>
             <input
                type="text"
                name="fullName"
@@ -89,27 +99,21 @@ const ContactItem = ({ contact, onDelete, onEdit }) => {
                onChange={handleChange}
             />
             {error && <p className="error">{error}</p>}
-            <button style={contactItemButtonStyles} onClick={handleSave}>
-               Salvar
-            </button>
-         </div>
+            <Button onClick={handleSave}>Salvar</Button>
+         </ItemContainer>
       );
    }
 
    return (
-      <div style={contactItemStyles}>
+      <ItemContainer>
          <p>
             {contact.fullName} - {contact.email} - {contact.phone}
          </p>
          <div>
-            <button style={deleteButtonStyles} onClick={onDelete}>
-               Excluir
-            </button>
-            <button style={editButtonStyles} onClick={handleEdit}>
-               Editar
-            </button>
+            <DeleteButton onClick={onDelete}>Excluir</DeleteButton>
+            <EditButton onClick={handleEdit}>Editar</EditButton>
          </div>
-      </div>
+      </ItemContainer>
    );
 };
 

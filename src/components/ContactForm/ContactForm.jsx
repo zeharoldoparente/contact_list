@@ -1,6 +1,33 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../actions/contactActions";
+import styled from "styled-components";
+
+const FormContainer = styled.div`
+   max-width: 400px;
+   margin: 0 auto;
+`;
+
+const Input = styled.input`
+   width: calc(100% - 30px);
+   padding: 10px;
+   margin-bottom: 10px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+`;
+
+const Button = styled.button`
+   padding: 10px 20px;
+   background-color: #007bff;
+   color: #fff;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+`;
+
+const Error = styled.p`
+   color: red;
+`;
 
 const ContactForm = () => {
    const dispatch = useDispatch();
@@ -30,66 +57,38 @@ const ContactForm = () => {
    };
 
    return (
-      <div style={contactFormStyles}>
+      <FormContainer>
          <h2>Adicionar Contato 📝</h2>
          <form onSubmit={handleSubmit}>
-            <input
+            <Input
                type="text"
                placeholder="Nome"
                value={firstName}
                onChange={(e) => setFirstName(e.target.value)}
-               style={contactFormInputStyles}
             />
-            <input
+            <Input
                type="text"
                placeholder="Sobrenome"
                value={lastName}
                onChange={(e) => setLastName(e.target.value)}
-               style={contactFormInputStyles}
             />
-            <input
+            <Input
                type="text"
                placeholder="Email"
                value={email}
                onChange={(e) => setEmail(e.target.value)}
-               style={contactFormInputStyles}
             />
-            <input
+            <Input
                type="text"
                placeholder="Telefone"
                value={phone}
                onChange={(e) => setPhone(e.target.value)}
-               style={contactFormInputStyles}
             />
-            {error && <p className="error">{error}</p>}
-            <button type="submit" style={contactFormButtonStyles}>
-               Adicionar
-            </button>
+            {error && <Error>{error}</Error>}
+            <Button type="submit">Adicionar</Button>
          </form>
-      </div>
+      </FormContainer>
    );
-};
-
-const contactFormStyles = {
-   maxWidth: "400px",
-   margin: "0 auto",
-};
-
-const contactFormInputStyles = {
-   width: "calc(100% - 30px)",
-   padding: "10px",
-   marginBottom: "10px",
-   border: "1px solid #ccc",
-   borderRadius: "5px",
-};
-
-const contactFormButtonStyles = {
-   padding: "10px 20px",
-   backgroundColor: "#007bff",
-   color: "#fff",
-   border: "none",
-   borderRadius: "5px",
-   cursor: "pointer",
 };
 
 export default ContactForm;
